@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CemViewerExamPreservation>
+  <Version>1.0</Version>
+  <ExamInfo>
+    <ModelName>CEM-530</ModelName>
+    <Date>2024-05-22</Date>
+    <Time>12:36:31</Time>
+    <Eye>R</Eye>
+    <Selected>C</Selected>
+    <FixInfoList>
+      <FixInfo>
+        <FixPos>C</FixPos>
+        <TotalIncludeEnable>True</TotalIncludeEnable>
+        <TotalInclude>True</TotalInclude>
+        <FollowUpExclude>False</FollowUpExclude>
+        <Selected>0</Selected>
+        <ImageInfoList>
+          <ImageInfo>
+            <FileName>202405220006_20240522_125011_NIDEK-CEM530_ENDOIMG01_R_01C95C.bmp</FileName>
+            <ListNo>1</ListNo>
+            <Order>0</Order>
+            <CT>587</CT>
+            <Selected>1</Selected>
+            <AnalysisInfoList>
+              <AnalysisInfo>
+                <FileName>202405220006_20240522_125011_NIDEK-CEM530_EX01_R_01C95C.bin</FileName>
+              </AnalysisInfo>
+              <AnalysisInfo>
+                <FileName>202405220006_20240522_125011_NIDEK-CEM530_EX01_R_01C95C_1_cem_e.bin</FileName>
+              </AnalysisInfo>
+            </AnalysisInfoList>
+          </ImageInfo>
+        </ImageInfoList>
+      </FixInfo>
+    </FixInfoList>
+  </ExamInfo>
+</CemViewerExamPreservation>

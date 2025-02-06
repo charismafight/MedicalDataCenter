@@ -1,39 +1,103 @@
-using Microsoft.EntityFrameworkCore;
-
 namespace MDC.Models;
 
-public class DataContext : DbContext
-{
-    public DataContext(DbContextOptions<DataContext> options)
-        : base(options)
-    { }
+using Microsoft.EntityFrameworkCore;
 
+public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
+{
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlite(@"Data Source=MDC.db");
 #if DEBUG
-        optionsBuilder.UseSeeding((context, _) =>
-        {
-            context.Set<Patient>().Add(new Patient
+        optionsBuilder.UseSeeding(
+            (context, _) =>
             {
-                Name = "test patient",
-                Age = "100岁",
-                PatientId = "test001",
-                Pinyin = "test pin yin",
-                PinyinShort = "t",
-                Sex = "男",
-                Tests = new List<Test>{
-                    new Test{Name="test1",TestId="1",Category="eyetest"},
-                    new Test{Name="test2",TestId="2",Category="eyetest"},
-                    new Test{Name="test3",TestId="3",Category="eyetest"},
-                }
-            });
-            context.SaveChanges();
-        });
+                context.Set<TestFile>().ExecuteDelete();
+                context.Set<Test>().ExecuteDelete();
+                context.Set<Patient>().ExecuteDelete();
+                context
+                    .Set<Patient>()
+                    .Add(
+                        new Patient
+                        {
+                            Name = "xiao zhongju",
+                            Age = string.Empty,
+                            PatientId = "202405220001",
+                            Pinyin = string.Empty,
+                            PinyinShort = "t",
+                            Sex = "男",
+                            Tests = new List<Test>()
+                            {
+                                new ()
+                                {
+                                    Name = "角膜内皮细胞",
+                                    TestId = "202405220001",
+                                    Category = "角膜内皮细胞",
+                                    // ReportPath = "202405220001.jpg",
+                                    ReportTime = new DateTime(2024, 5, 22),
+                                    TestTime = new DateTime(2024, 5, 22),
+                                    TestFiles = [
+new TestFile() {
+    FileName = "202405220001.jpg",
+    FilePath = "角膜内皮细胞/202405220001.jpg",
+    CreateTime = DateTime.Now,
+    MD5 = "for test",
+    FileSize = 5000,
+},
+new TestFile() {
+    FileName = "202405220002.jpg",
+    FilePath = "角膜内皮细胞/202405220002.jpg",
+    CreateTime = DateTime.Now,
+    MD5 = "for test",
+    FileSize = 5000,
+},
+                                    ],
+                                },
+                            },
+                        }
+                    );
+
+                context
+                    .Set<Patient>()
+                    .Add(
+                        new Patient
+                        {
+                            Name = "liu qixiu",
+                            Age = string.Empty,
+                            PatientId = "20240522002",
+                            Pinyin = string.Empty,
+                            PinyinShort = "t",
+                            Sex = "男",
+                            Tests =
+                            [
+                                new ()
+                                {
+                                    Name = "角膜内皮细胞",
+                                    TestId = "2024052209",
+                                    Category = "角膜内皮细胞",
+                                    ReportTime = new DateTime(2024, 5, 22),
+                                    TestTime = new DateTime(2024, 5, 22),
+                                    TestFiles = [
+                                        new TestFile()
+                                        {
+                                                FileName = "2024052209.jpg",
+                                                FilePath = "角膜内皮细胞/2024052209.jpg",
+                                                CreateTime = DateTime.Now,
+                                                MD5 = "for test",
+                                                FileSize = 5000,
+                                        },
+                                    ],
+                                },
+                            ],
+                        }
+                    );
+                context.SaveChanges();
+            }
+        );
 #endif
     }
 
     // list Dbset Below to use
     public DbSet<Test> Tests => Set<Test>();
     public DbSet<Patient> Patients => Set<Patient>();
+    public DbSet<TestFile> TestFiles => Set<TestFile>();
 }

@@ -1,3 +1,5 @@
+namespace MDC.Models;
+
 public class Test
 {
     public int Id { get; set; }
@@ -6,7 +8,7 @@ public class Test
 
     public string Name { get; set; }
 
-    public string? ReportPath { get; set; }
+    public List<TestFile> TestFiles { get; set; }
 
     public string Category { get; set; }
 

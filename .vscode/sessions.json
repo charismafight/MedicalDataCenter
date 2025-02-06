@@ -1,0 +1,31 @@
+{
+  "$schema": "https://cdn.statically.io/gh/nguyenngoclongdev/cdn/main/schema/v10/terminal-keeper.json",
+  "theme": "tribe",
+  "active": "default",
+  "activateOnStartup": true,
+  "keepExistingTerminals": false,
+  "sessions": {
+    "default": [
+      {
+        "name": "goto webapi",
+        "autoExecuteCommands": true,
+        "icon": "person",
+        "color": "terminal.ansiGreen",
+        "commands": ["cd src/webapi/mdc"]
+      },
+      {
+        "name": "goto web",
+        "autoExecuteCommands": true,
+        "icon": "globe",
+        "color": "terminal.ansiGreen",
+        "commands": ["cd src/web/mdc"]
+      },
+      {
+        "name": "EF update",
+        "autoExecuteCommands": false,
+        "icon": "database",
+        "commands": ["cd src/webapi/mdc", "dotnet ef database update"]
+      }
+    ]
+  }
+}

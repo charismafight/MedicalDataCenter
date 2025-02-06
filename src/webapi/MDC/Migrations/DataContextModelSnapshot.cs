@@ -17,7 +17,7 @@ namespace MDC.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.1");
 
-            modelBuilder.Entity("Patient", b =>
+            modelBuilder.Entity("MDC.Models.Patient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -55,7 +55,7 @@ namespace MDC.Migrations
                     b.ToTable("Patients");
                 });
 
-            modelBuilder.Entity("Test", b =>
+            modelBuilder.Entity("MDC.Models.Test", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,9 +71,6 @@ namespace MDC.Migrations
 
                     b.Property<int?>("PatientId")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("ReportPath")
-                        .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("ReportTime")
                         .HasColumnType("TEXT");
@@ -92,16 +89,65 @@ namespace MDC.Migrations
                     b.ToTable("Tests");
                 });
 
-            modelBuilder.Entity("Test", b =>
+            modelBuilder.Entity("MDC.Models.TestFile", b =>
                 {
-                    b.HasOne("Patient", null)
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("MD5")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("TestId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("UpdateTime")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TestId");
+
+                    b.ToTable("TestFiles");
+                });
+
+            modelBuilder.Entity("MDC.Models.Test", b =>
+                {
+                    b.HasOne("MDC.Models.Patient", null)
                         .WithMany("Tests")
                         .HasForeignKey("PatientId");
                 });
 
-            modelBuilder.Entity("Patient", b =>
+            modelBuilder.Entity("MDC.Models.TestFile", b =>
+                {
+                    b.HasOne("MDC.Models.Test", null)
+                        .WithMany("TestFiles")
+                        .HasForeignKey("TestId");
+                });
+
+            modelBuilder.Entity("MDC.Models.Patient", b =>
                 {
                     b.Navigation("Tests");
+                });
+
+            modelBuilder.Entity("MDC.Models.Test", b =>
+                {
+                    b.Navigation("TestFiles");
                 });
 #pragma warning restore 612, 618
         }
