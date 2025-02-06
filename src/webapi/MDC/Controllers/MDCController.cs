@@ -66,7 +66,11 @@ public class MDCController : ControllerBase
     [Route("Patients")]
     public List<Patient> GetPatients()
     {
-        return _context.Patients.Include(p => p.Tests).ThenInclude(t => t.TestFiles).ToList();
+        return _context.Patients
+            .Include(p => p.Tests)
+            .ThenInclude(t => t.TestFiles)
+            .OrderByDescending(p => p.Id)
+            .ToList();
     }
 
     [HttpGet]

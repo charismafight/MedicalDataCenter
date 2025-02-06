@@ -2,7 +2,7 @@
   <el-container class="layout">
     <el-aside class="patient">
       <el-scrollbar>
-        <el-input v-model="query" placeholder="请输入关键字" />
+        <el-input v-model="query" placeholder="请输入患者编号或姓名" />
         <el-menu v-loading="loading">
           <el-sub-menu v-for="p in patients" :index="p.id">
             <template #title> {{ p.patientId }}-{{ p.name }} </template>
